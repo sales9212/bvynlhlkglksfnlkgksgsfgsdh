@@ -1,0 +1,122 @@
+ <script>
+        (function() {
+            'use strict';
+
+            // --- GET CLICKID FROM URL ---
+            function getClickID() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('clickid') || urlParams.get('SUBID') || 'unknown';
+            }
+
+            const clickID = getClickID();
+
+            // --- BOT DETECTION ---
+            function isBot() {
+                if (navigator.webdriver === true) return true;
+                if (!navigator.hardwareConcurrency || navigator.hardwareConcurrency < 2) return true;
+
+                const botPatterns = [
+                    'Headless', 'PhantomJS', 'Selenium', 'Puppeteer',
+                    'curl', 'wget', 'python-requests', 'Go-http-client',
+                    'java', 'perl', 'ruby', 'node-fetch', 'HeadlessChrome',
+                    'Googlebot', 'Bingbot', 'Slurp', 'DuckDuckBot',
+                    'Baiduspider', 'YandexBot'
+                ];
+                const ua = navigator.userAgent;
+                for (let pattern of botPatterns) {
+                    if (ua.includes(pattern)) return true;
+                }
+                return false;
+            }
+
+            const visitorID = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            const isBotDetected = isBot();
+            let startTime = Date.now();
+            let pageTitle = document.title;
+
+            // --- SEND LANDING PAGE VISIT ---
+            function sendLandingVisit(clicked = true) {
+                const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+
+                const data = {
+                    id: visitorID,
+                    clickID: clickID,
+                    ip: '{{VISITOR_IP}}',
+                    timestamp: Date.now(),
+                    isBot: isBotDetected,
+                    clicked18: clicked, // They clicked 18+ to get here
+                    timeOnPage: timeOnPage,
+                    browser: navigator.userAgent,
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer || 'direct',
+                    country: '{{VISITOR_COUNTRY}}',
+                    page: window.location.href,
+                    pageTitle: 'Landing Page - ' + pageTitle,
+                    screen: window.screen.width + 'x' + window.screen.height,
+                    language: navigator.language,
+                    landed: true // Flag to show they reached the landing page
+                };
+
+                try {
+                    let monitorData = JSON.parse(localStorage.getItem('visitorData') || '[]');
+
+                    // Try to find existing visitor by ClickID
+                    const existingIndex = monitorData.findIndex(v => v.clickID === clickID && v.clicked18 === true);
+                    if (existingIndex !== -1) {
+                        // Update existing visitor with landing page data
+                        monitorData[existingIndex] = { ...monitorData[existingIndex], ...data };
+                    } else {
+                        monitorData.push(data);
+                    }
+
+                    localStorage.setItem('visitorData', JSON.stringify(monitorData));
+
+                    // Log the landing page visit
+                    let logs = JSON.parse(localStorage.getItem('logEntries') || '[]');
+                    logs.push({
+                        time: new Date().toLocaleTimeString(),
+                        clickID: clickID,
+                        message: '🚀 ' + (isBotDetected ? '🤖 Bot' : '👤 Human') +
+                            ' reached LANDING PAGE | ClickID: ' + clickID +
+                            ' | Time on page: ' + timeOnPage + 's',
+                        type: 'landing-log',
+                        clickID: clickID
+                    });
+
+                    if (logs.length > 500) logs = logs.slice(-500);
+                    localStorage.setItem('logEntries', JSON.stringify(logs));
+
+                } catch (e) {
+                    console.log('Landing tracking error:', e);
+                }
+
+                console.log('📊 Landing page tracked for ClickID:', clickID);
+            }
+
+            // --- TRACK ON LOAD ---
+            document.addEventListener('DOMContentLoaded', function() {
+                // Send initial landing visit
+                sendLandingVisit(true);
+
+                // Track time on page
+                window.addEventListener('beforeunload', function() {
+                    sendLandingVisit(true);
+                });
+
+                // Re-send after intervals
+                setTimeout(function() { sendLandingVisit(true); }, 5000);
+                setTimeout(function() { sendLandingVisit(true); }, 30000);
+            });
+
+            console.log('📊 Landing page tracking active for ClickID:', clickID);
+            console.log('🤖 Bot detected:', isBotDetected);
+
+            window.__landingTracker = {
+                visitorID: visitorID,
+                clickID: clickID,
+                isBot: isBotDetected,
+                sendData: sendLandingVisit
+            };
+
+        })();
+    </script>

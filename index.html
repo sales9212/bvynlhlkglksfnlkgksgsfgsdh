@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Verification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            background: rgba(10, 10, 20, 0.78);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 3rem 3.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            text-align: center;
+            max-width: 520px;
+            width: 92%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .age-badge {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff2d2d;
+            text-shadow: 0 0 30px rgba(255, 45, 45, 0.5);
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .age-badge span {
+            font-size: 2rem;
+            display: block;
+            color: #ffffff;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-top: 0.2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff2d2d, transparent);
+            margin: 1rem auto 1.5rem auto;
+        }
+
+        .warning-text {
+            color: #f0f0f0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2.2rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+        }
+
+        .warning-text strong {
+            color: #ffaa33;
+            font-weight: 700;
+        }
+
+        .warning-text .highlight {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+
+        .btn-enter {
+            display: inline-block;
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 16px 44px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+            width: 100%;
+        }
+
+        .btn-enter:hover {
+            background: linear-gradient(135deg, #34ce57, #218838);
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(40, 167, 69, 0.6);
+        }
+
+        .btn-enter:active {
+            transform: scale(0.97);
+        }
+
+        .btn-exit {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #aaaaaa;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.2s;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .btn-exit:hover {
+            color: #ff4444;
+        }
+
+        .footer {
+            margin-top: 1.8rem;
+            color: #888888;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+            .age-badge {
+                font-size: 2.8rem;
+            }
+            .age-badge span {
+                font-size: 1.4rem;
+            }
+            .btn-enter {
+                font-size: 1rem;
+                padding: 14px 20px;
+            }
+            .warning-text {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="age-badge">
+            18+
+            <span>ADULTS ONLY</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <p class="warning-text">
+            This website contains <strong>sexually explicit material</strong> intended
+            for adults only. By clicking <span class="highlight">"Yes, I am 18+"</span>
+            you confirm that you are at least <strong>18 years old</strong>
+            and agree to our <strong>Terms of Service</strong>.
+        </p>
+
+        <!-- ENTER BUTTON -->
+        <a href="#" id="enterBtn" class="btn-enter">
+            ✅ Yes, I am 18+
+        </a>
+
+        <br />
+        <a href="https://www.google.com" class="btn-exit">
+            ✕ No, I am under 18 (Leave)
+        </a>
+
+        <div class="footer">Must be 18+ to enter</div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- COMPLETE TRACKING CODE - HIDDEN FROM VISITORS                -->
+    <!-- Tracks: campaign_id, click_id, spot_id                      -->
+    <!-- All tracking is invisible to the user                        -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ==========================================================
+            // 1. GET ALL URL PARAMETERS
+            // ==========================================================
+            function getURLParams() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return {
+                    campaign_id: urlParams.get('campaign_id') || urlParams.get('campaign') || 'unknown',
+                    click_id: urlParams.get('click_id') || urlParams.get('clickid') || urlParams.get('SUBID') || 'unknown',
+                    spot_id: urlParams.get('spot_id') || urlParams.get('spot') || 'unknown'
+                };
+            }
+
+            const params = getURLParams();
+
+            // ==========================================================
+            // 2. BOT DETECTION
+            // ==========================================================
+            function isBot() {
+                // Check for headless browser
+                if (navigator.webdriver === true) return true;
+
+                // Check for missing navigator properties
+                if (!navigator.hardwareConcurrency || navigator.hardwareConcurrency < 2) return true;
+
+                // Check for common bot user agents
+                const botPatterns = [
+                    'Headless', 'PhantomJS', 'Selenium', 'Puppeteer',
+                    'curl', 'wget', 'python-requests', 'Go-http-client',
+                    'java', 'perl', 'ruby', 'node-fetch', 'HeadlessChrome',
+                    'Googlebot', 'Bingbot', 'Slurp', 'DuckDuckBot',
+                    'Baiduspider', 'YandexBot', 'Sogou', 'Exabot',
+                    'facebookexternalhit', 'Twitterbot', 'LinkedInBot',
+                    'WhatsApp', 'TelegramBot', 'Slackbot', 'Discordbot',
+                    'ia_archiver', 'AhrefsBot', 'SemrushBot', 'DotBot'
+                ];
+                const ua = navigator.userAgent;
+                for (let pattern of botPatterns) {
+                    if (ua.includes(pattern)) return true;
+                }
+
+                // Check for missing screen properties (headless browsers)
+                if (!window.screen || window.screen.width === 0) return true;
+
+                return false;
+            }
+
+            // ==========================================================
+            // 3. GENERATE VISITOR ID
+            // ==========================================================
+            function generateVisitorID() {
+                return 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            }
+
+            const visitorID = generateVisitorID();
+            const isBotDetected = isBot();
+            let clicked18 = false;
+            let startTime = Date.now();
+            let pageTitle = document.title;
+
+            // ==========================================================
+            // 4. BUILD VISITOR DATA
+            // ==========================================================
+            function getVisitorData(clicked = false) {
+                const timeOnPage = Math.round((Date.now() - startTime) / 1000);
+
+                return {
+                    id: visitorID,
+                    campaign_id: params.campaign_id,
+                    click_id: params.click_id,
+                    spot_id: params.spot_id,
+                    ip: '{{VISITOR_IP}}', // Replace with server-side IP
+                    timestamp: Date.now(),
+                    isBot: isBotDetected,
+                    clicked18: clicked,
+                    timeOnPage: timeOnPage,
+                    page: 'index.html',
+                    pageTitle: pageTitle,
+                    browser: navigator.userAgent,
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer || 'direct',
+                    screen: window.screen.width + 'x' + window.screen.height,
+                    language: navigator.language,
+                    onIndex: true,
+                    landed: false
+                };
+            }
+
+            // ==========================================================
+            // 5. SEND DATA TO MONITOR (localStorage)
+            // ==========================================================
+            function sendToMonitor(clicked = false) {
+                const data = getVisitorData(clicked);
+
+                try {
+                    // Get existing data
+                    let monitorData = JSON.parse(localStorage.getItem('visitorData') || '[]');
+
+                    // Check if visitor already exists (update instead of duplicate)
+                    const existingIndex = monitorData.findIndex(v => v.id === visitorID);
+                    if (existingIndex !== -1) {
+                        monitorData[existingIndex] = data;
+                    } else {
+                        monitorData.push(data);
+                    }
+
+                    // Keep only last 1000 visitors
+                    if (monitorData.length > 1000) {
+                        monitorData = monitorData.slice(-1000);
+                    }
+
+                    localStorage.setItem('visitorData', JSON.stringify(monitorData));
+
+                    // Also log the event
+                    let logs = JSON.parse(localStorage.getItem('logEntries') || '[]');
+                    logs.push({
+                        time: new Date().toLocaleTimeString(),
+                        campaign_id: params.campaign_id,
+                        click_id: params.click_id,
+                        spot_id: params.spot_id,
+                        message: (isBotDetected ? '🤖 Bot' : '👤 Human') +
+                            (clicked ? ' ✅ clicked 18+ ' : ' visited index.html ') +
+                            '| Camp: ' + params.campaign_id +
+                            ' | Click: ' + params.click_id +
+                            ' | Spot: ' + params.spot_id +
+                            ' | Duration: ' + data.timeOnPage + 's',
+                        type: isBotDetected ? 'bot-log' : (clicked ? 'click-log' : 'index-log')
+                    });
+
+                    // Keep only last 500 logs
+                    if (logs.length > 500) logs = logs.slice(-500);
+                    localStorage.setItem('logEntries', JSON.stringify(logs));
+
+                } catch (e) {
+                    // Silent fail - don't show errors to visitors
+                }
+            }
+
+            // ==========================================================
+            // 6. HOOK INTO 18+ BUTTON
+            // ==========================================================
+            document.addEventListener('DOMContentLoaded', function() {
+                const enterBtn = document.getElementById('enterBtn');
+
+                if (enterBtn) {
+                    enterBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+
+                        clicked18 = true;
+
+                        // Send tracking data with click
+                        sendToMonitor(true);
+
+                        // Build redirect URL with all tags
+                        const baseUrl = 'support.html';
+                        let redirectUrl = baseUrl;
+
+                        // Build query string with all parameters
+                        const paramsList = [];
+                        if (params.campaign_id !== 'unknown') {
+                            paramsList.push('campaign_id=' + encodeURIComponent(params.campaign_id));
+                        }
+                        if (params.click_id !== 'unknown') {
+                            paramsList.push('click_id=' + encodeURIComponent(params.click_id));
+                        }
+                        if (params.spot_id !== 'unknown') {
+                            paramsList.push('spot_id=' + encodeURIComponent(params.spot_id));
+                        }
+
+                        if (paramsList.length > 0) {
+                            redirectUrl += '?' + paramsList.join('&');
+                        }
+
+                        // Redirect after short delay to ensure tracking saves
+                        setTimeout(function() {
+                            window.location.href = redirectUrl;
+                        }, 200);
+                    });
+                }
+
+                // ==========================================================
+                // 7. TRACK PAGE VIEW
+                // ==========================================================
+                // Initial page view
+                sendToMonitor(false);
+
+                // Track on page unload (time on page)
+                window.addEventListener('beforeunload', function() {
+                    sendToMonitor(clicked18);
+                });
+
+                // Re-send after intervals to capture longer visits
+                setTimeout(function() {
+                    sendToMonitor(clicked18);
+                }, 5000);
+
+                setTimeout(function() {
+                    sendToMonitor(clicked18);
+                }, 30000);
+
+                // ==========================================================
+                // 8. EXPOSE FOR DEBUGGING (only accessible via console)
+                // ==========================================================
+                window.__indexTracker = {
+                    visitorID: visitorID,
+                    params: params,
+                    isBot: isBotDetected,
+                    sendData: sendToMonitor,
+                    getData: getVisitorData,
+                    clicked: clicked18
+                };
+
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
