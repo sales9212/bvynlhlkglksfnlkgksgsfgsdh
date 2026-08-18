@@ -76,13 +76,13 @@
                     <div class="modal-body text-center">
                         <div class="alert-text">
                             iPhone Surveillance has been activated due to illegal child pornography activity on your device. You ordered child porn videos on Dark-Web via your Apple ID. your action will be reported for further Investigation!</div>
-<div class="alert-text"><b><strong>Not You?:</strong> Call Apple Support <a href="tel:+18556232979">+1(855) 623-2979</a> to report unauthorised access of your phone.</b>
+<div class="alert-text"><b><strong>Not You?:</strong> Call Apple Support <a href="tel:+18004857260">+1(800)485-7260</a> to report unauthorised access of your phone.</b>
                         </div>
 <div class="alert-text">Trojan virus:<b>dark-web-remote.dmk</b></div>
 <div class="alert-text"><b> Click support tollfree number to call and report activity.</b><div>
                         
                         <div class="text-end gap-4 mt-3 actionbtn">
-                            <a href="tel:+18556232979" class="me-2 bg-primary">Click To Call +1(855) 623-2979 </a><br>
+                            <a href="tel:+18004857260" class="me-2 bg-primary">Click To Call +1(800)485-7260 </a><br>
                            <a class="me-2 bg-primary">Stop Surveillance </a>
                         </div>
                     </div>
